@@ -1,11 +1,14 @@
 import { FormEvent, useState } from "react";
 import PostsCard from "./components/PostsCard";
-import { useGetPostsQuery } from "./redux/api";
+import { useGetPostsQuery, useNewPostMutation } from "./redux/api";
 
 function App() {
   const { data, error, isLoading, isSuccess, isError } = useGetPostsQuery("");
+
+  const { isLoading, data } = useNewPostMutation();
+
   const [title, setTitle] = useState<string>();
-  const [body, setBody] = useState<string>();
+  const [number, setNumber] = useState<number>();
   console.log(data, error, isLoading, isSuccess, isError);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -23,10 +26,10 @@ function App() {
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
-          type="text"
-          placeholder="Body"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          type="number"
+          placeholder="Views"
+          value={number}
+          onChange={(e) => setNumber(+e.target.value)}
         />
         <button type="submit">Save</button>
       </form>

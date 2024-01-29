@@ -10,14 +10,14 @@ export const myApi = createApi({
     getPosts: builder.query<PostProps[], string>({
       query: () => "posts",
     }),
-    newPosts : builder.mutation<PostProps , string>({
-        query : (post) => {
-            url : "posts" , 
-            method : "POST",
-            bo
-        }
-    })
+    newPost: builder.mutation<PostProps, PostProps>({
+      query: (post) => ({
+        url: "posts",
+        method: "POST",
+        body: post,
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = myApi;
+export const { useGetPostsQuery, useNewPostMutation } = myApi;
